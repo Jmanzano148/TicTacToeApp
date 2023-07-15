@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".FinPartidaActivity">
+
+    <TextView
+        android:id="@+id/textoGanador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20sp"
+        android:text="HA GANADO EL JUGADOR"
+        android:textAlignment="center"
+        android:textSize="30sp" />
+
+    <ImageView
+        android:id="@+id/imagenCentral"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:layout_marginBottom="20sp"
+        android:src="@drawable/felicidades" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20sp"
+        android:text="Resultados"
+        android:textAlignment="center"
+        android:textSize="30sp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tableroResultados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include layout="@layout/tablero_layout" /> <!-- Incluimos el tablero -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/botonVolverJugar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30sp"
+        android:text="Volver a jugar" />
+
+    <Button
+        android:id="@+id/botonVolverInicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:text="Volver a inicio" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
