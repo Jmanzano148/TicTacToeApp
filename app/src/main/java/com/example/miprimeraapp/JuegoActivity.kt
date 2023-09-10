@@ -1,20 +1,19 @@
-package com.example.miprimeraapp.dosjugadores
+package com.example.miprimeraapp
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import com.example.miprimeraapp.FinPartidaActivity
-import com.example.miprimeraapp.R
-import com.example.miprimeraapp.dosjugadores.DosJugadoresActivity.Companion.K_NJUGADOR1
-import com.example.miprimeraapp.dosjugadores.DosJugadoresActivity.Companion.K_NJUGADOR2
+import com.example.miprimeraapp.MainActivity.Companion.K_NJUGADOR1
+import com.example.miprimeraapp.MainActivity.Companion.K_NJUGADOR2
 
-class JuegoDosJugadoresActivity : AppCompatActivity() {
+class JuegoActivity : AppCompatActivity() {
 
     private val TITULO_TURNO: String = "Turno jugador"
 
     companion object {
+
         var FICHA1: String = "0"
         var FICHA2: String = "X"
 

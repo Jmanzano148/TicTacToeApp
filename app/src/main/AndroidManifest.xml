@@ -28,7 +28,7 @@
             android:name=".FinPartidaActivity"
             android:exported="false" />
         <activity
-            android:name=".dosjugadores.JuegoDosJugadoresActivity"
+            android:name=".JuegoActivity"
             android:exported="false" />
         <activity
             android:name=".dosjugadores.DosJugadoresActivity"

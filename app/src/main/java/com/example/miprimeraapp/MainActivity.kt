@@ -9,6 +9,16 @@ import com.example.miprimeraapp.unjugador.UnJugadorActivity
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        // Tipo de fichas existentes
+        const val FICHA_TIPO1 = "O"
+        const val FICHA_TIPO2 = "X"
+
+        // Claves de los nombres de los jugadores
+        const val K_NJUGADOR1: String = "NJUGADOR1"
+        const val K_NJUGADOR2: String = "NJUGADOR2"
+    }
+
     private lateinit var btnUnJugador: Button
     private lateinit var btnDosJugadores: Button
 

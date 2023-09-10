@@ -8,21 +8,20 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.example.miprimeraapp.dosjugadores.JuegoDosJugadoresActivity.Companion.K_C11
-import com.example.miprimeraapp.dosjugadores.JuegoDosJugadoresActivity.Companion.K_C12
-import com.example.miprimeraapp.dosjugadores.JuegoDosJugadoresActivity.Companion.K_C13
-import com.example.miprimeraapp.dosjugadores.JuegoDosJugadoresActivity.Companion.K_C21
-import com.example.miprimeraapp.dosjugadores.JuegoDosJugadoresActivity.Companion.K_C22
-import com.example.miprimeraapp.dosjugadores.JuegoDosJugadoresActivity.Companion.K_C23
-import com.example.miprimeraapp.dosjugadores.JuegoDosJugadoresActivity.Companion.K_C31
-import com.example.miprimeraapp.dosjugadores.JuegoDosJugadoresActivity.Companion.K_C32
-import com.example.miprimeraapp.dosjugadores.JuegoDosJugadoresActivity.Companion.K_C33
-import com.example.miprimeraapp.dosjugadores.JuegoDosJugadoresActivity.Companion.K_NGANADOR
-import com.example.miprimeraapp.dosjugadores.JuegoDosJugadoresActivity.Companion.K_TGANADOR
-import com.example.miprimeraapp.dosjugadores.JuegoDosJugadoresActivity.Companion.K_VALORES_CASILLAS
-import com.example.miprimeraapp.dosjugadores.DosJugadoresActivity.Companion.K_NJUGADOR1
-import com.example.miprimeraapp.dosjugadores.DosJugadoresActivity.Companion.K_NJUGADOR2
-import com.example.miprimeraapp.dosjugadores.JuegoDosJugadoresActivity
+import com.example.miprimeraapp.JuegoActivity.Companion.K_C11
+import com.example.miprimeraapp.JuegoActivity.Companion.K_C12
+import com.example.miprimeraapp.JuegoActivity.Companion.K_C13
+import com.example.miprimeraapp.JuegoActivity.Companion.K_C21
+import com.example.miprimeraapp.JuegoActivity.Companion.K_C22
+import com.example.miprimeraapp.JuegoActivity.Companion.K_C23
+import com.example.miprimeraapp.JuegoActivity.Companion.K_C31
+import com.example.miprimeraapp.JuegoActivity.Companion.K_C32
+import com.example.miprimeraapp.JuegoActivity.Companion.K_C33
+import com.example.miprimeraapp.JuegoActivity.Companion.K_NGANADOR
+import com.example.miprimeraapp.JuegoActivity.Companion.K_TGANADOR
+import com.example.miprimeraapp.JuegoActivity.Companion.K_VALORES_CASILLAS
+import com.example.miprimeraapp.MainActivity.Companion.K_NJUGADOR1
+import com.example.miprimeraapp.MainActivity.Companion.K_NJUGADOR2
 
 class FinPartidaActivity : AppCompatActivity() {
 
@@ -145,7 +144,7 @@ class FinPartidaActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val intent = Intent(this, JuegoDosJugadoresActivity::class.java)
+        val intent = Intent(this, JuegoActivity::class.java)
         intent.putExtra(K_NJUGADOR1, nJugador1)
         intent.putExtra(K_NJUGADOR2, nJugador2)
         startActivity(intent)

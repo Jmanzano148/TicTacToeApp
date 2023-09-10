@@ -7,19 +7,16 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import com.example.miprimeraapp.dosjugadores.JuegoDosJugadoresActivity.Companion.FICHA1
-import com.example.miprimeraapp.dosjugadores.JuegoDosJugadoresActivity.Companion.FICHA2
+import com.example.miprimeraapp.JuegoActivity
+import com.example.miprimeraapp.JuegoActivity.Companion.FICHA1
+import com.example.miprimeraapp.JuegoActivity.Companion.FICHA2
+import com.example.miprimeraapp.MainActivity.Companion.FICHA_TIPO1
+import com.example.miprimeraapp.MainActivity.Companion.FICHA_TIPO2
+import com.example.miprimeraapp.MainActivity.Companion.K_NJUGADOR1
+import com.example.miprimeraapp.MainActivity.Companion.K_NJUGADOR2
 import com.example.miprimeraapp.R
 
 class DosJugadoresActivity : AppCompatActivity() {
-
-    private val FICHA_TIPO1 = "O"
-    private val FICHA_TIPO2 = "X"
-
-    companion object {
-        const val K_NJUGADOR1: String = "NJUGADOR1"
-        const val K_NJUGADOR2: String = "NJUGADOR2"
-    }
 
     private lateinit var barraNombre1: EditText
     private lateinit var btnFicha1Jug1: CardView
@@ -69,7 +66,7 @@ class DosJugadoresActivity : AppCompatActivity() {
         }
 
         botonComenzar.setOnClickListener {
-            val intent = Intent(this, JuegoDosJugadoresActivity::class.java)
+            val intent = Intent(this, JuegoActivity::class.java)
             intent.putExtra(K_NJUGADOR1, barraNombre1.text.toString())
             intent.putExtra(K_NJUGADOR2, barraNombre2.text.toString())
             startActivity(intent)
@@ -79,36 +76,18 @@ class DosJugadoresActivity : AppCompatActivity() {
     private fun cambiaFondosFichas(fichaJug1: Int, fichaJug2: Int) {
         if (fichaJug1 == 1 && fichaJug2 == 2) {
             btnFicha1Jug1.setCardBackgroundColor(ContextCompat.getColor(this, R.color.seleccionado))
-            btnFicha2Jug1.setCardBackgroundColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.sinselecionar
-                )
-            )
-            btnFicha1Jug2.setCardBackgroundColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.sinselecionar
-                )
-            )
+            btnFicha2Jug1.setCardBackgroundColor(ContextCompat.getColor(this, R.color.sinselecionar))
+            btnFicha1Jug2.setCardBackgroundColor(ContextCompat.getColor(this, R.color.sinselecionar))
             btnFicha2Jug2.setCardBackgroundColor(ContextCompat.getColor(this, R.color.seleccionado))
+
             FICHA1 = FICHA_TIPO1
             FICHA2 = FICHA_TIPO2
         } else {
-            btnFicha1Jug1.setCardBackgroundColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.sinselecionar
-                )
-            )
+            btnFicha1Jug1.setCardBackgroundColor(ContextCompat.getColor(this, R.color.sinselecionar))
             btnFicha2Jug1.setCardBackgroundColor(ContextCompat.getColor(this, R.color.seleccionado))
             btnFicha1Jug2.setCardBackgroundColor(ContextCompat.getColor(this, R.color.seleccionado))
-            btnFicha2Jug2.setCardBackgroundColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.sinselecionar
-                )
-            )
+            btnFicha2Jug2.setCardBackgroundColor(ContextCompat.getColor(this, R.color.sinselecionar))
+
             FICHA1 = FICHA_TIPO2
             FICHA2 = FICHA_TIPO1
         }
