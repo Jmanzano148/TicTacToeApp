@@ -69,6 +69,7 @@ class DosJugadoresActivity : AppCompatActivity() {
             val intent = Intent(this, JuegoActivity::class.java)
             intent.putExtra(K_NJUGADOR1, barraNombre1.text.toString())
             intent.putExtra(K_NJUGADOR2, barraNombre2.text.toString())
+            intent.putExtra(JuegoActivity.K_NUMJUGADORES, 2)
             startActivity(intent)
         }
     }

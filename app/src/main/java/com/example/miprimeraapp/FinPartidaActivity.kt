@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.miprimeraapp.JuegoActivity.Companion.K_NGANADOR
-import com.example.miprimeraapp.JuegoActivity.Companion.K_TGANADOR
 import com.example.miprimeraapp.JuegoActivity.Companion.NUM_COL
 import com.example.miprimeraapp.JuegoActivity.Companion.NUM_FILAS
 import com.example.miprimeraapp.JuegoActivity.Companion.tablero

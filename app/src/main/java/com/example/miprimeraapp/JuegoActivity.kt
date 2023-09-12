@@ -23,7 +23,7 @@ class JuegoActivity : AppCompatActivity() {
         lateinit var tablero: Array<Array<TextView>> // Almacena y visualiza el tablero
 
         const val K_NGANADOR: String = "NGANADOR"
-        const val K_TGANADOR: String = "TGANADOR"
+        const val K_NUMJUGADORES: String = "NUMJUGADORES"
     }
 
     private lateinit var tituloTurno: TextView // Muestra el turno del jugador
@@ -31,8 +31,7 @@ class JuegoActivity : AppCompatActivity() {
     private lateinit var nJugador1: String // Nombre del jugador 1
     private lateinit var nJugador2: String // Nombre del jugador 2
 
-
-
+    private var numJugadores: Int = 0// Indica el número de jugadores humanos
     private var fichaActual: String = FICHA1 // Almacena la ficha del turno actual
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,8 +45,12 @@ class JuegoActivity : AppCompatActivity() {
     private fun initUI() {
         nJugador1 = intent.extras?.getString(K_NJUGADOR1).toString()
         nJugador2 = intent.extras?.getString(K_NJUGADOR2).toString()
+        numJugadores = intent.extras?.getInt(K_NUMJUGADORES)!!
 
-        tituloTurno.text = "$TITULO_TURNO $fichaActual $nJugador1"
+        if (nJugador1.isEmpty()) nJugador1 = "1" // Jugador 1 en blanco
+        if (nJugador2.equals("null") || nJugador2.isEmpty()) nJugador2 = "2" // Jugador 2 en blanco
+
+        tituloTurno.text = "$TITULO_TURNO $nJugador1"
     }
 
     private fun initComponents() {
@@ -95,7 +98,7 @@ class JuegoActivity : AppCompatActivity() {
             fichaActual = FICHA1
             nombreJugador = nJugador1
         }
-        tituloTurno.text = "$TITULO_TURNO $fichaActual $nombreJugador"
+        tituloTurno.text = "$TITULO_TURNO $nombreJugador"
     }
 
     /**
@@ -161,5 +164,7 @@ class JuegoActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
+
 
 }

@@ -12,7 +12,7 @@ import com.example.miprimeraapp.JuegoActivity
 import com.example.miprimeraapp.MainActivity.Companion.FICHA_TIPO1
 import com.example.miprimeraapp.MainActivity.Companion.FICHA_TIPO2
 import com.example.miprimeraapp.MainActivity.Companion.K_NJUGADOR1
-import com.example.miprimeraapp.MainActivity.Companion.K_NJUGADOR2
+import com.example.miprimeraapp.JuegoActivity.Companion.K_NUMJUGADORES
 
 class UnJugadorActivity : AppCompatActivity() {
 
@@ -50,7 +50,7 @@ class UnJugadorActivity : AppCompatActivity() {
         botonComenzar.setOnClickListener {
             val intent = Intent(this, JuegoActivity::class.java)
             intent.putExtra(K_NJUGADOR1, barraNombre1.text.toString())
-            intent.putExtra(K_NJUGADOR2, "IA")
+            intent.putExtra(K_NUMJUGADORES, 1)
             startActivity(intent)
         }
     }

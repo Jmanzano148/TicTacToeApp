@@ -58,6 +58,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10sp"
-        android:text="Volver a inicio" />
+        android:text="Cambio jugador" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
