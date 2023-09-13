@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.miprimeraapp.JuegoActivity.Companion.K_NGANADOR
+import com.example.miprimeraapp.JuegoActivity.Companion.K_NUMJUGADORES
 import com.example.miprimeraapp.JuegoActivity.Companion.NUM_COL
 import com.example.miprimeraapp.JuegoActivity.Companion.NUM_FILAS
 import com.example.miprimeraapp.JuegoActivity.Companion.tablero
@@ -24,6 +25,7 @@ class FinPartidaActivity : AppCompatActivity() {
     private lateinit var nJugador2: String // Nombre del jugador 2
     private lateinit var nombreGanador: String // Nombre del jugador ganador (null si hay empate)
 
+    private var numJugadores: Int = 1// Indica el número de jugadores humanos
     lateinit var tableroFinal: Array<Array<TextView>> // Almacena y visualiza el tablero final
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +46,8 @@ class FinPartidaActivity : AppCompatActivity() {
         nombreGanador = intent.extras?.getString(K_NGANADOR).toString()
         nJugador1 = intent.extras?.getString(K_NJUGADOR1).toString()
         nJugador2 = intent.extras?.getString(K_NJUGADOR2).toString()
+
+        numJugadores = intent.extras?.getInt(K_NUMJUGADORES)!!
 
         tableroFinal = Array(NUM_FILAS) { fila ->
             Array(NUM_COL) { columna ->
@@ -89,6 +93,7 @@ class FinPartidaActivity : AppCompatActivity() {
         val intent = Intent(this, JuegoActivity::class.java)
         intent.putExtra(K_NJUGADOR1, nJugador1)
         intent.putExtra(K_NJUGADOR2, nJugador2)
+        intent.putExtra(K_NUMJUGADORES, numJugadores)
         startActivity(intent)
         finish()
     }

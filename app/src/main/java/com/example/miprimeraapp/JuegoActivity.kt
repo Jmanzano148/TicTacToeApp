@@ -31,7 +31,7 @@ class JuegoActivity : AppCompatActivity() {
     private lateinit var nJugador1: String // Nombre del jugador 1
     private lateinit var nJugador2: String // Nombre del jugador 2
 
-    private var numJugadores: Int = 0// Indica el número de jugadores humanos
+    private var numJugadores: Int = 1// Indica el número de jugadores humanos
     private var fichaActual: String = FICHA1 // Almacena la ficha del turno actual
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,11 +76,80 @@ class JuegoActivity : AppCompatActivity() {
             for (col in tablero[fila].indices) {
                 tablero[fila][col].setOnClickListener {
                     colocarFicha(fila, col)
-                    if(tableroLLeno() || compruebaVictoria())
+                    if(tableroLLeno() || compruebaVictoria(fichaActual, true))
                         navegarFinPartida()
-                    else cambiarTurno()
+                    else {
+                        cambiarTurno()
+                        // Si solo juega un jugador debe colocar la máquina
+                        if (numJugadores == 1) {
+                            val mejorMovimiento = minimax()
+                            val fila = mejorMovimiento[0]
+                            val col = mejorMovimiento[1]
+                            colocarFicha(fila, col)
+                            if(tableroLLeno() || compruebaVictoria(fichaActual, true))
+                                navegarFinPartida()
+                            else cambiarTurno()
+                        }
+                    }
                 }
             }
+        }
+    }
+
+    private fun minimax(): IntArray {
+        var mejorMovimiento = intArrayOf(-1, -1)
+        var mejorPuntuacion = Int.MIN_VALUE
+
+        for (i in 0 until 3) {
+            for (j in 0 until 3) {
+                if (tablero[i][j].text == " ") {
+                    tablero[i][j].text = FICHA2
+                    val puntuacion = minimaxHelper(false)
+                    tablero[i][j].text = " " // Deshacer el movimiento
+
+                    if (puntuacion > mejorPuntuacion) {
+                        mejorPuntuacion = puntuacion
+                        mejorMovimiento = intArrayOf(i, j)
+                    }
+                }
+            }
+        }
+        return mejorMovimiento
+    }
+
+    fun minimaxHelper(estaMaximizando: Boolean): Int {
+        // Casos base
+        if (compruebaVictoria(FICHA2, false)) return 1
+        if (compruebaVictoria(FICHA1, false)) return -1
+        if (tableroLLeno()) return 0
+
+        if (estaMaximizando) {
+            var mejorPuntuacion = Int.MIN_VALUE
+            for (i in 0 until 3) {
+                for (j in 0 until 3) {
+                    if (tablero[i][j].text == " ") {
+                        tablero[i][j].text = FICHA2
+                        val puntuacion = minimaxHelper(false)
+                        tablero[i][j].text = " " // Deshacer el movimiento
+                        mejorPuntuacion = maxOf(puntuacion, mejorPuntuacion)
+                    }
+                }
+            }
+            return mejorPuntuacion
+
+        } else {
+            var mejorPuntuacion = Int.MAX_VALUE
+            for (i in 0 until 3) {
+                for (j in 0 until 3) {
+                    if (tablero[i][j].text == " ") {
+                        tablero[i][j].text = FICHA1
+                        val puntuacion = minimaxHelper(true)
+                        tablero[i][j].text = " " // Deshacer el movimiento
+                        mejorPuntuacion = minOf(puntuacion, mejorPuntuacion)
+                    }
+                }
+            }
+            return mejorPuntuacion
         }
     }
 
@@ -101,6 +170,8 @@ class JuegoActivity : AppCompatActivity() {
         tituloTurno.text = "$TITULO_TURNO $nombreJugador"
     }
 
+
+
     /**
      * Función para verificar si el tablero está lleno (empate)
      */
@@ -118,31 +189,39 @@ class JuegoActivity : AppCompatActivity() {
     /**
      * Función para verificar si un jugador ha ganado
      */
-    fun compruebaVictoria(): Boolean {
+    fun compruebaVictoria(ficha: String, pintar: Boolean): Boolean {
         for (i in 0 until NUM_FILAS) {
-            if (tablero[i][0].text == fichaActual && tablero[i][1].text == fichaActual && tablero[i][2].text == fichaActual) {
-                tablero[i][0].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
-                tablero[i][1].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
-                tablero[i][2].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
+            if (tablero[i][0].text == ficha && tablero[i][1].text == ficha && tablero[i][2].text == ficha) {
+                if (pintar) {
+                    tablero[i][0].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
+                    tablero[i][1].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
+                    tablero[i][2].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
+                }
                 return true // Ganó en una fila
             }
-            if (tablero[0][i].text == fichaActual && tablero[1][i].text == fichaActual && tablero[2][i].text == fichaActual) {
-                tablero[0][i].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
-                tablero[1][i].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
-                tablero[2][i].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
+            if (tablero[0][i].text == ficha && tablero[1][i].text == ficha && tablero[2][i].text == ficha) {
+                if (pintar) {
+                    tablero[0][i].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
+                    tablero[1][i].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
+                    tablero[2][i].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
+                }
                 return true // Ganó en una columna
             }
         }
-        if (tablero[0][0].text == fichaActual && tablero[1][1].text == fichaActual && tablero[2][2].text == fichaActual) {
-            tablero[0][0].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
-            tablero[1][1].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
-            tablero[2][2].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
+        if (tablero[0][0].text == ficha && tablero[1][1].text == ficha && tablero[2][2].text == ficha) {
+            if (pintar) {
+                tablero[0][0].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
+                tablero[1][1].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
+                tablero[2][2].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
+            }
             return true // Ganó en la diagonal principal
         }
-        if (tablero[0][2].text == fichaActual && tablero[1][1].text == fichaActual && tablero[2][0].text == fichaActual) {
-            tablero[0][2].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
-            tablero[1][1].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
-            tablero[2][0].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
+        if (tablero[0][2].text == ficha && tablero[1][1].text == ficha && tablero[2][0].text == ficha) {
+            if (pintar) {
+                tablero[0][2].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
+                tablero[1][1].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
+                tablero[2][0].setTextColor(ContextCompat.getColor(this, R.color.fichaGanadora))
+            }
             return true // Ganó en la diagonal secundaria
         }
         return false
@@ -161,10 +240,9 @@ class JuegoActivity : AppCompatActivity() {
         intent.putExtra(K_NJUGADOR1, nJugador1)
         intent.putExtra(K_NJUGADOR2, nJugador2)
         intent.putExtra(K_NGANADOR, nombreGanador)
+        intent.putExtra(K_NUMJUGADORES, numJugadores)
         startActivity(intent)
         finish()
     }
-
-
 
 }
