@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="40sp"
             android:fontFamily="casual"
-            android:text="Tres \nen \nrayas"
+            android:text="Tres \nen \nraya"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="50sp" />
