@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.miprimeraapp.MainActivity.Companion.K_NJUGADOR1
 import com.example.miprimeraapp.MainActivity.Companion.K_NJUGADOR2
+import kotlin.random.Random
 
 class JuegoActivity : AppCompatActivity() {
 
@@ -100,6 +101,17 @@ class JuegoActivity : AppCompatActivity() {
         var mejorMovimiento = intArrayOf(-1, -1)
         var mejorPuntuacion = Int.MIN_VALUE
 
+        // Para la primera jugada la máquina juega en una casilla aleatoria
+        if (getNumFichasColocadas() == 1) {
+            var fila: Int
+            var col: Int
+            do {
+                fila = Random.nextInt(3)
+                col = Random.nextInt(3)
+            } while (tablero[fila][col].text != " ")
+            return intArrayOf(fila, col)
+        }
+
         for (i in 0 until 3) {
             for (j in 0 until 3) {
                 if (tablero[i][j].text == " ") {
@@ -170,7 +182,17 @@ class JuegoActivity : AppCompatActivity() {
         tituloTurno.text = "$TITULO_TURNO $nombreJugador"
     }
 
-
+    private fun getNumFichasColocadas(): Int {
+        var fichasColocadas = 0
+        for (i in 0 until NUM_FILAS) {
+            for (j in 0 until NUM_COL) {
+                if (tablero[i][j].text != " ") {
+                    fichasColocadas++
+                }
+            }
+        }
+        return fichasColocadas
+    }
 
     /**
      * Función para verificar si el tablero está lleno (empate)
